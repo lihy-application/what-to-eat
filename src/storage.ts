@@ -1,7 +1,19 @@
-import { AppData } from './types';
+import { AppData, DayMeals } from './types';
 import { defaultWindows } from './defaultWindows';
 
 const STORAGE_KEY = 'what-to-eat-data';
+
+// 创建空数据
+export const createEmptyData = (): AppData => ({
+  windows: {
+    周一: { 午餐: [], 晚餐: [] },
+    周二: { 午餐: [], 晚餐: [] },
+    周三: { 午餐: [], 晚餐: [] },
+    周四: { 午餐: [], 晚餐: [] },
+    周五: { 午餐: [], 晚餐: [] },
+  },
+  history: [],
+});
 
 export const loadData = (): AppData => {
   try {

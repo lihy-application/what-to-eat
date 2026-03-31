@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import type { AppData, DayOfWeek, MealTime, WindowOption, SelectionRecord } from './types';
-import { loadData, saveData, generateId, resetToDefault } from './storage';
-import { loadData, saveData, generateId, resetToDefault } from './storage';
+import { loadData, saveData, generateId, resetToDefault, createEmptyData } from './storage';
 
 // 图片路径映射
 const getImagePath = (day: DayOfWeek, index: number): string => {
@@ -32,7 +31,7 @@ function App() {
   const getTodayDay = (): DayOfWeek => {
     const dayOfWeek = new Date().getDay();
     const mapping: Record<number, DayOfWeek> = {
-      1: '周一', 2: '周二', 3: '周三', 4: '周四', 5: '周五', 6: '周六', 0: '周一'
+      1: '周一', 2: '周二', 3: '周三', 4: '周四', 5: '周五', 0: '周一'
     };
     return mapping[dayOfWeek] || '周一';
   };
