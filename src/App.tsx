@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import type { AppData, DayOfWeek, MealTime, WindowOption, SelectionRecord } from './types';
-import { DAYS, MEAL_TIMES, createEmptyData } from './types';
+import { loadData, saveData, generateId, resetToDefault } from './storage';
 import { loadData, saveData, generateId, resetToDefault } from './storage';
 
 // 图片路径映射
@@ -156,31 +156,6 @@ function App() {
     saveData(newData);
   };
 
-  // 添加窗口
-  const addWindow = (day: DayOfWeek, mealTime: MealTime) => {
-    const newWindows = { ...data.windows };
-    const newOption: WindowOption = {
-      id: generateId(),
-      name: '',
-      description: '',
-    };
-    newWindows[day][mealTime] = [...newWindows[day][mealTime], newOption];
-    
-    const newData = { ...data, windows: newWindows };
-    setData(newData);
-    saveData(newData);
-  };
-
-  // 删除窗口
-  const deleteWindow = (day: DayOfWeek, mealTime: MealTime, index: number) => {
-    const newWindows = { ...data.windows };
-    newWindows[day][mealTime] = newWindows[day][mealTime].filter((_, i) => i !== index);
-    
-    const newData = { ...data, windows: newWindows };
-    setData(newData);
-    saveData(newData);
-  };
-
   // 计算偏好
   const getPreferences = (): { windowName: string; count: number }[] => {
     const counts: Record<string, number> = {};
@@ -286,8 +261,8 @@ function App() {
           ) : (
             <div className="result-panel">
               <div className="result-card">
-                <h2>{randomOption.name}</h2>
-                {randomOption.description && (
+                <h2>{randomOption?.name}</h2>
+                {randomOption?.description && (
                   <p className="description">{randomOption.description}</p>
                 )}
                 <div className="result-meta">

@@ -1,4 +1,4 @@
-import { AppData, createEmptyData } from './types';
+import { AppData } from './types';
 import { defaultWindows } from './defaultWindows';
 
 const STORAGE_KEY = 'what-to-eat-data';
